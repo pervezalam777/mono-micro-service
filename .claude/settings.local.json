@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"f:\\\\pervez\\\\AI-learning\\\\microservices\\\\mono-repo\\\\services\\\\api-gateway\\\\src\")",
+      "Bash(npm install *)"
+    ],
+    "additionalDirectories": [
+      "f:\\pervez\\AI-learning\\microservices\\mono-repo\\services\\api-gateway"
+    ]
+  }
+}

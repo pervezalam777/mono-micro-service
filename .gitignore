@@ -1,0 +1,51 @@
+# Git Ignore
+node_modules
+dist
+build
+out
+.cache
+.turbo
+coverage
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+.dockerignore
+
+# Terraform
+.terraform
+.terraform.tfstate
+
+# Coverage
+.nyc_output
+
+# Build artifacts
+.next
+next-env.d.ts
+
+# Lockfile
+yarn.lock
+package-lock.json
+
+# Cache
+.temp

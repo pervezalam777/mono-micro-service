@@ -1,0 +1,22 @@
+{
+  "name": "@app/books",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/books.umd.cjs",
+  "module": "./dist/books.js",
+  "types": "./dist/books.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.1"
+  }
+}
