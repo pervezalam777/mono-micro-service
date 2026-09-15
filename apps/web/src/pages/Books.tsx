@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Book, Author } from '../types';
+import { Book } from '../types';
 import api from '../services/api';
 
 export default function Books() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [authors, setAuthors] = useState<Map<string, Author>>(new Map());
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,18 +26,15 @@ export default function Books() {
     }
   };
 
+  const getAuthorName = () => {
+    return 'Unknown Author';
+  };
+
   const filteredBooks = books.filter(
     (book) =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.isbn.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (authors.get(book.authorId)?.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        authors.get(book.authorId)?.lastName?.toLowerCase().includes(searchTerm.toLowerCase()))
+      book.isbn.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const getAuthorName = (authorId: string) => {
-    const author = authors.get(authorId);
-    return author ? `${author.firstName} ${author.lastName}` : 'Unknown Author';
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -87,7 +83,7 @@ export default function Books() {
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-lg font-medium text-gray-900">{book.title}</h3>
-                      <p className="mt-1 text-sm text-gray-500">by {getAuthorName(book.authorId)}</p>
+                      <p className="mt-1 text-sm text-gray-500">by {getAuthorName()}</p>
                       <p className="mt-2 text-sm text-gray-600">ISBN: {book.isbn}</p>
                     </div>
                     <div className="flex-shrink-0">

@@ -23,6 +23,12 @@ For detailed architecture documentation, see [ARCHITECTURE.md](./ARCHITECTURE.md
 - Tailwind CSS
 - Redux Toolkit (State Management)
 
+### Plugin Architecture
+- Module-based packages with internal routing
+- Lazy loading support via React.lazy
+- Redux encapsulation per package
+- Zero tight coupling with host applications
+
 ### DevOps
 - Docker & docker-compose
 - AWS (ECS, ALB, RDS, DynamoDB)
@@ -35,8 +41,16 @@ For detailed architecture documentation, see [ARCHITECTURE.md](./ARCHITECTURE.md
 mono-repo/
 ├── apps/                   # Frontend applications
 │   ├── web/               # Main web application
-│   ├── author/            # Author package
-│   └── books/             # Books package
+│   ├── author/            # Author package (plugin-based)
+│   │   ├── src/
+│   │   │   ├── components/   # Reusable UI components
+│   │   │   ├── pages/        # Page containers
+│   │   │   ├── routes/       # Internal routing
+│   │   │   ├── store/        # Redux store
+│   │   │   ├── hooks/        # Custom hooks
+│   │   │   └── types/        # Type definitions
+│   │   └── README.md         # Package documentation
+│   └── books/             # Books package (plugin-based)
 ├── services/              # Backend microservices
 │   ├── auth-service/      # Authentication service
 │   ├── author-service/    # Author management service

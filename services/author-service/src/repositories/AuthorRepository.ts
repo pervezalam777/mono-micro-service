@@ -35,6 +35,7 @@ export const authorRepository: AuthorRepository = {
     const result = await dbService.query(
       'SELECT * FROM authors WHERE is_active = true ORDER BY created_at DESC'
     );
+    console.log('author service findAll result:', result.rows); // Debugging line
     return result.rows;
   },
 

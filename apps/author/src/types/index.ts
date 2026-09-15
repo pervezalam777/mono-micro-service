@@ -1,37 +1,5 @@
-export interface Author {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  bio?: string;
-  profileImageUrl?: string;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+export type { Author, AuthorFormProps, AuthorFormData, AuthorListProps, AuthorCardProps } from './Author';
+export type { AuthorsState, RootState, AppDispatch } from './Store';
 
-export interface AuthorFormProps {
-  author?: Author;
-  onSubmit: (data: AuthorFormData) => Promise<void>;
-  onCancel?: () => void;
-  isLoading?: boolean;
-}
-
-export interface AuthorFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  bio?: string;
-  profileImageUrl?: string;
-}
-
-export interface AuthorListProps {
-  authors: Author[];
-  onSelect?: (author: Author) => void;
-  isLoading?: boolean;
-}
-
-export interface AuthorCardProps {
-  author: Author;
-  onClick?: () => void;
-}
+// Re-export for convenience
+export type { Author as AuthorType, AuthorFormProps as AuthorFormPropsType } from './Author';

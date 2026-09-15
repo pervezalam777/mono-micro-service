@@ -1,16 +1,22 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import { Suspense, lazy } from 'react';
+import { injectAuthorReducer, isAuthorInjected } from './store/dynamicStore';
 
-// Lazy load components
+// Lazy load auth components
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Authors = lazy(() => import('./pages/Authors'));
-const Books = lazy(() => import('./pages/Books'));
-const AuthorDetail = lazy(() => import('./pages/AuthorDetail'));
-const BookDetail = lazy(() => import('./pages/BookDetail'));
+
+// Lazy load author package (will inject reducer on first load)
+const AuthorRoutes = lazy(() => {
+  // Inject the author reducer when the package is first loaded
+  if (!isAuthorInjected()) {
+    injectAuthorReducer();
+  }
+  return import('@app/author').then((module) => ({ default: module.AuthorRoutes }));
+});
 
 // Protected route component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -45,27 +51,25 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Author plugin routes - lazy loaded */}
         <Route
-          path="/authors"
+          path="/authors/*"
           element={
             <ProtectedRoute>
-              <Authors />
+              <Suspense fallback={<div>Loading author pages...</div>}>
+                <AuthorRoutes />
+              </Suspense>
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/authors/:id"
-          element={
-            <ProtectedRoute>
-              <AuthorDetail />
-            </ProtectedRoute>
-          }
-        />
+
+        {/* Books routes */}
         <Route
           path="/books"
           element={
             <ProtectedRoute>
-              <Books />
+              <Dashboard /> {/* Placeholder - to be implemented */}
             </ProtectedRoute>
           }
         />
@@ -73,7 +77,7 @@ function App() {
           path="/books/:id"
           element={
             <ProtectedRoute>
-              <BookDetail />
+              <Dashboard /> {/* Placeholder - to be implemented */}
             </ProtectedRoute>
           }
         />

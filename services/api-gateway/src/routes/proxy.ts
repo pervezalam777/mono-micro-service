@@ -16,10 +16,9 @@ const getServiceFromPath = (path: string): 'auth' | 'author' | 'book' | null => 
   // Remove API version prefix first (e.g., "/api/v1/auth/login" -> "/auth/login")
   const apiVersion = getApiVersion(path);
   const pathWithoutApiVersion = path.startsWith(apiVersion) ? path.substring(apiVersion.length) : path;
-
-  if (pathWithoutApiVersion.startsWith('/auth/')) return 'auth';
-  if (pathWithoutApiVersion.startsWith('/authors/')) return 'author';
-  if (pathWithoutApiVersion.startsWith('/books/')) return 'book';
+  if (pathWithoutApiVersion.startsWith('/authors')) return 'author';
+  if (pathWithoutApiVersion.startsWith('/auth')) return 'auth';
+  if (pathWithoutApiVersion.startsWith('/books')) return 'book';
   return null;
 };
 
