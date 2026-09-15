@@ -59,6 +59,40 @@ class DatabaseService {
     }
     return this.pool.connect();
   }
+
+  async initSchema(): Promise<void> {
+    if (!this.pool) {
+      throw new Error('Database not connected');
+    }
+
+    const client = await this.pool.connect();
+    try {
+      await client.query(`
+        CREATE TABLE IF NOT EXISTS books (
+          id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          title VARCHAR(255) NOT NULL,
+          isbn VARCHAR(20) UNIQUE NOT NULL,
+          author_id UUID REFERENCES authors(id),
+          description TEXT,
+          cover_image_url TEXT,
+          publication_date DATE,
+          publisher VARCHAR(255),
+          page_count INTEGER,
+          language VARCHAR(100),
+          category VARCHAR(100),
+          is_active BOOLEAN DEFAULT TRUE,
+          created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+          updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+      console.log('Database schema initialized');
+    } catch (error) {
+      console.error('Error initializing database schema:', error);
+      throw error;
+    } finally {
+      client.release();
+    } 
+  }
 }
 
 export const dbService = new DatabaseService({

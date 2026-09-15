@@ -72,6 +72,7 @@ const PORT = process.env.PORT || 3002;
 async function startServer() {
   try {
     await dbService.connect();
+    await dbService.initSchema(); // Initialize the database schema
     app.listen(PORT, () => {
       logger.info(`Book service running on port ${PORT}`);
       console.log(`Book service listening at http://localhost:${PORT}`);

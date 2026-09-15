@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Author } from '../types';
+import api from '@app/api-client';
 
 // Async thunks for author operations
 export const fetchAuthors = createAsyncThunk<
@@ -8,13 +9,10 @@ export const fetchAuthors = createAsyncThunk<
   { rejectValue: string }
 >('authors/fetchAll', async (_, thunkAPI) => {
   try {
-    const response = await fetch('/api/authors');
-    if (!response.ok) {
-      throw new Error('Failed to fetch authors');
-    }
-    return await response.json();
+    const response = await api.get(`/authors`);
+    return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.message || 'Failed to fetch authors');
+    return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to fetch authors');
   }
 });
 
@@ -24,19 +22,10 @@ export const createAuthor = createAsyncThunk<
   { rejectValue: string }
 >('authors/create', async (authorData, thunkAPI) => {
   try {
-    const response = await fetch('/api/authors', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(authorData),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to create author');
-    }
-    return await response.json();
+    const response = await api.post(`/authors`, authorData);
+    return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.message || 'Failed to create author');
+    return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to create author');
   }
 });
 
@@ -46,19 +35,10 @@ export const updateAuthor = createAsyncThunk<
   { rejectValue: string }
 >('authors/update', async ({ id, data }, thunkAPI) => {
   try {
-    const response = await fetch(`/api/authors/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to update author');
-    }
-    return await response.json();
+    const response = await api.put(`/authors/${id}`, data);
+    return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.message || 'Failed to update author');
+    return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to update author');
   }
 });
 
@@ -68,15 +48,10 @@ export const deleteAuthor = createAsyncThunk<
   { rejectValue: string }
 >('authors/delete', async (id, thunkAPI) => {
   try {
-    const response = await fetch(`/api/authors/${id}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-      throw new Error('Failed to delete author');
-    }
+    await api.delete(`/authors/${id}`);
     return id;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.message || 'Failed to delete author');
+    return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to delete author');
   }
 });
 

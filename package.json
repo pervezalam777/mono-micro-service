@@ -5,7 +5,6 @@
   "description": "Microservices architecture with Author and Books services",
   "workspaces": [
     "apps/*",
-    "packages/*",
     "services/*"
   ],
   "scripts": {

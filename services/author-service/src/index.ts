@@ -72,6 +72,7 @@ const PORT = process.env.PORT || 3001;
 async function startServer() {
   try {
     await dbService.connect();
+    await dbService.initSchema();
     app.listen(PORT, () => {
       logger.info(`Author service running on port ${PORT}`);
       console.log(`Author service listening at http://localhost:${PORT}`);

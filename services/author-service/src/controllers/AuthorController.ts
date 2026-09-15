@@ -31,8 +31,9 @@ export const getAuthor = async (req: Request, res: Response): Promise<void> => {
 
 export const getAllAuthors = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log('Fetching all authors...'); // Debugging line
     const authors = await authorService.getAllAuthors();
-
+    console.log('Authors fetched:', authors); // Debugging line
     res.status(200).json({
       data: authors,
     });

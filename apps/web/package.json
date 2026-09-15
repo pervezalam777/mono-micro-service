@@ -9,6 +9,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@app/api-client": "0.1.0",
     "@reduxjs/toolkit": "^2.3.0",
     "@app/author": "0.1.0",
     "axios": "^1.7.7",

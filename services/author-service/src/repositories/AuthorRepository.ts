@@ -32,6 +32,7 @@ export const authorRepository: AuthorRepository = {
   },
 
   async findAll(): Promise<Author[]> {
+    console.log('Fetching all authors from the database...'); // Debugging line
     const result = await dbService.query(
       'SELECT * FROM authors WHERE is_active = true ORDER BY created_at DESC'
     );
