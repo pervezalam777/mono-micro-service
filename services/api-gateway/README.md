@@ -42,7 +42,7 @@ cp .env.example .env
 
 Environment variables:
 
-- `PORT` - Gateway port (default: 8000)
+- `PORT` - Gateway port (default: 4000)
 - `NODE_ENV` - Environment (default: development)
 - `LOG_LEVEL` - Logging level (default: info)
 - `CORS_ORIGIN` - CORS allowed origin(s). Leave empty for default (ports 5173-5179 via regex), or specify one or more comma-separated origins
@@ -85,7 +85,7 @@ npm start
 In your frontend app, set the base URL to point to the gateway:
 
 ```env
-VITE_API_ALL_URL=http://localhost:8000/api/v1
+VITE_API_ALL_URL=http://localhost:4000/api/v1
 ```
 
 ### Example Requests
@@ -94,7 +94,7 @@ All requests go through the gateway:
 
 ```bash
 # Login
-POST http://localhost:8000/api/v1/auth/login
+POST http://localhost:4000/api/v1/auth/login
 Content-Type: application/json
 {
   "email": "user@example.com",
@@ -102,13 +102,13 @@ Content-Type: application/json
 }
 
 # Get all authors
-GET http://localhost:8000/api/v1/authors
+GET http://localhost:4000/api/v1/authors
 
 # Get all books
-GET http://localhost:8000/api/v1/books
+GET http://localhost:4000/api/v1/books
 
 # Create a book
-POST http://localhost:8000/api/v1/books
+POST http://localhost:4000/api/v1/books
 Authorization: Bearer <token>
 Content-Type: application/json
 {
@@ -126,7 +126,7 @@ To run with Docker Compose:
 docker-compose up api-gateway
 ```
 
-The gateway will be available at `http://localhost:8000`.
+The gateway will be available at `http://localhost:4000`.
 
 ## Production Deployment
 
@@ -144,7 +144,7 @@ For local development, the gateway provides a single entry point that:
 ## Health Check
 
 ```bash
-GET http://localhost:8000/health
+GET http://localhost:4000/health
 ```
 
 Response:

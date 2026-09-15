@@ -52,7 +52,7 @@ app.get('/health', (req: Request, res: Response) => {
 
 // Export app without starting the server
 // The 404 and error handlers should be added after routes are mounted
-export const createServer = (port: number = process.env.PORT ? parseInt(process.env.PORT) : 8000) => {
+export const createServer = (port: number = process.env.PORT ? parseInt(process.env.PORT) : 4000) => {
   app.listen(port, () => {
     logger.info(`API Gateway running on port ${port}`);
     console.log(`API Gateway listening at http://localhost:${port}`);

@@ -10,7 +10,7 @@ export const fetchAuthors = createAsyncThunk<
 >('authors/fetchAll', async (_, thunkAPI) => {
   try {
     const response = await api.get(`/authors`);
-    return response.data;
+    return response.data.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to fetch authors');
   }

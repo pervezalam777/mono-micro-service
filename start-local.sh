@@ -3,7 +3,7 @@
 echo "Starting Microservices Local Environment..."
 echo ""
 
-echo "Starting API Gateway on port 8000..."
+echo "Starting API Gateway on port 4000..."
 cd services/api-gateway
 npm run dev &
 
@@ -22,11 +22,11 @@ npm run dev &
 echo ""
 echo "All services started!"
 echo ""
-echo "API Gateway: http://localhost:8000"
+echo "API Gateway: http://localhost:4000"
 echo "Auth Service: http://localhost:3000"
 echo "Author Service: http://localhost:3001"
 echo "Book Service: http://localhost:3002"
 echo ""
 echo "Press any key to open the API Gateway health check in your browser..."
 read -n 1 -s
-xdg-open http://localhost:8000/health
+xdg-open http://localhost:4000/health

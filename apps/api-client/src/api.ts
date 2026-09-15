@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } f
 
 // Microservice base URLs from environment variables
 export const API_BASE_URLS = {
-  gateway: import.meta.env.VITE_API_ALL_URL || 'http://localhost:8000/api/v1',
+  gateway: import.meta.env.VITE_API_ALL_URL || 'http://localhost:4000/api/v1',
 } as const;
 
 // Base API instance (can be used for shared endpoints)
@@ -25,9 +25,33 @@ api.interceptors.request.use(
   (error: AxiosError) => Promise.reject(error)
 );
 
+// Helper function to convert snake_case keys to camelCase
+const convertToCamelCase = <T extends object>(obj: T): T => {
+  if (Array.isArray(obj)) {
+    return obj.map((item) => convertToCamelCase(item)) as unknown as T;
+  }
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+
+  const result: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const camelKey = key.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+    result[camelKey] = typeof value === 'object' ? convertToCamelCase(value) : value;
+  }
+  return result as T;
+};
+
+
 // Response interceptor
 api.interceptors.response.use(
-  (response: AxiosResponse) => response,
+  (response: AxiosResponse) => {
+    // Convert response data to camelCase
+    if (response.data) {
+      response.data = convertToCamelCase(response.data);
+    }
+    return response;
+  },
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 

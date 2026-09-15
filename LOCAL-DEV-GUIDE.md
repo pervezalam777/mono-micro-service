@@ -5,7 +5,7 @@ This document describes how to run the microservices and API gateway locally.
 ## Overview
 
 For local development, we use:
-- **API Gateway** (port 8000) - Single entry point for all microservices
+- **API Gateway** (port 4000) - Single entry point for all microservices
 - **Auth Service** (port 3000) - Authentication service
 - **Author Service** (port 3001) - Author management service
 - **Book Service** (port 3002) - Book management service
@@ -84,10 +84,7 @@ cp .env.example .env
 Update `apps/web/.env` to use the gateway:
 
 ```env
-VITE_API_AUTH_URL=http://localhost:8000/api/v1/auth
-VITE_API_AUTHOR_URL=http://localhost:8000/api/v1/authors
-VITE_API_BOOK_URL=http://localhost:8000/api/v1/books
-VITE_API_ALL_URL=http://localhost:8000/api/v1
+VITE_API_ALL_URL=http://localhost:4000/api/v1
 ```
 
 ## Testing the Setup
@@ -95,7 +92,7 @@ VITE_API_ALL_URL=http://localhost:8000/api/v1
 ### Health Check
 
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:4000/health
 ```
 
 Expected response:
@@ -111,7 +108,7 @@ Expected response:
 
 ```bash
 # Register a new user
-curl -X POST http://localhost:8000/api/v1/auth/register \
+curl -X POST http://localhost:4000/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
@@ -121,7 +118,7 @@ curl -X POST http://localhost:8000/api/v1/auth/register \
   }'
 
 # Login
-curl -X POST http://localhost:8000/api/v1/auth/login \
+curl -X POST http://localhost:4000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
@@ -133,10 +130,10 @@ curl -X POST http://localhost:8000/api/v1/auth/login \
 
 ```bash
 # Get all authors
-curl http://localhost:8000/api/v1/authors
+curl http://localhost:4000/api/v1/authors
 
 # Create author (requires auth)
-curl -X POST http://localhost:8000/api/v1/authors \
+curl -X POST http://localhost:4000/api/v1/authors \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <token>" \
   -d '{
@@ -151,10 +148,10 @@ curl -X POST http://localhost:8000/api/v1/authors \
 
 ```bash
 # Get all books
-curl http://localhost:8000/api/v1/books
+curl http://localhost:4000/api/v1/books
 
 # Create book (requires auth)
-curl -X POST http://localhost:8000/api/v1/books \
+curl -X POST http://localhost:4000/api/v1/books \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <token>" \
   -d '{

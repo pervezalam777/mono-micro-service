@@ -13,6 +13,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "declaration": true,
+    "emitDeclarationOnly": false,
+    "outDir": "./dist",
     "jsx": "react-jsx",
 
     /* Linting */
@@ -28,5 +30,5 @@
     }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules", "dist"]
 }

@@ -100,7 +100,7 @@ The project includes an API Gateway that routes requests to microservices. For l
 
 For local development, the API Gateway (`services/api-gateway/`) provides a single entry point for all microservices:
 
-- Gateway URL: `http://localhost:8000/api/v1`
+- Gateway URL: `http://localhost:4000/api/v1`
 - Auth: `/api/v1/auth/*`
 - Authors: `/api/v1/authors/*`
 - Books: `/api/v1/books/*`
@@ -129,7 +129,7 @@ cd services/auth-service && npm run build
 
 Once services are running:
 
-- **API Gateway (Local Dev)**: `http://localhost:8000/api/v1`
+- **API Gateway (Local Dev)**: `http://localhost:4000/api/v1`
   - Auth: `/api/v1/auth/*`
   - Authors: `/api/v1/authors/*`
   - Books: `/api/v1/books/*`
