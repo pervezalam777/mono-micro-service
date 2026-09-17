@@ -10,7 +10,7 @@ export const fetchAuthors = createAsyncThunk<
 >('authors/fetchAll', async (_, thunkAPI) => {
   try {
     const response = await api.get(`/authors`);
-    return response.data.data;
+    return response.data.data as Author[];
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to fetch authors');
   }
@@ -23,7 +23,7 @@ export const createAuthor = createAsyncThunk<
 >('authors/create', async (authorData, thunkAPI) => {
   try {
     const response = await api.post(`/authors`, authorData);
-    return response.data;
+    return response.data.data as Author;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to create author');
   }
@@ -36,7 +36,7 @@ export const updateAuthor = createAsyncThunk<
 >('authors/update', async ({ id, data }, thunkAPI) => {
   try {
     const response = await api.put(`/authors/${id}`, data);
-    return response.data;
+    return response.data.data as Author;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response?.data?.message || error.message || 'Failed to update author');
   }

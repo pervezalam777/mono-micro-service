@@ -11,13 +11,13 @@ export function AuthorList({ authors, onSelect, isLoading }: AuthorListProps) {
   );
 
   if (!authors || authors.length === 0) {
-    return renderNoAuthors(); 
+    return renderNoAuthors();
   }
 
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {authors && authors.length > 0 && authors.map((author) => (
-        <AuthorCard key={author.id} author={author} onClick={onSelect ? () => onSelect(author) : undefined} />
+      {authors.map((author) => (
+        <AuthorCard key={author.id} author={author} onClick={onSelect} />
       ))}
     </div>
   );

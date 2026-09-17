@@ -64,7 +64,7 @@ api.interceptors.response.use(
           return Promise.reject(error);
         }
 
-        const response = await axios.post(`/auth/refresh-token`, {
+        const response = await api.post(`/auth/refresh-token`, {
           refreshToken,
         });
 
@@ -75,7 +75,7 @@ api.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         }
 
-        return axios(originalRequest);
+        return api(originalRequest);
       } catch (refreshError) {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');

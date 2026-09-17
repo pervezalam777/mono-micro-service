@@ -33,5 +33,5 @@ export interface AuthorListProps {
 
 export interface AuthorCardProps {
   author: Author;
-  onClick?: () => void;
+  onClick?: (author: Author) => void;
 }

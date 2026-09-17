@@ -14,11 +14,10 @@ export { AuthorRoutes } from './routes/AuthorRoutes';
 export { useAuthors, useAuthor } from './hooks/useAuthors';
 
 // Store
-export { authorStore } from './store/store';
+export { authorStore, authorReducer } from './store/store';
 export type { AuthorRootState, AuthorAppDispatch } from './store/store';
 export { authorsSlice, fetchAuthors, createAuthor, updateAuthor, deleteAuthor } from './store/authorsSlice';
 export type { AuthorsState } from './store/types';
-export { authorReducer } from './store/store';
 
 // Types - import first then re-export
 import type { Author, AuthorFormProps, AuthorFormData, AuthorListProps, AuthorCardProps } from './types';

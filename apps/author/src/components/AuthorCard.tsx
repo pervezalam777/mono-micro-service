@@ -1,9 +1,16 @@
 import { AuthorCardProps } from '../types';
 
 export function AuthorCard({ author, onClick }: AuthorCardProps) {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onClick) {
+      onClick(author);
+    }
+  };
+  
   return (
     <div
-      onClick={onClick}
+      onClick={handleClick}
       className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer"
     >
       <div className="flex items-center space-x-4">
